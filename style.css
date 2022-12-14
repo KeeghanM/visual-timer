@@ -1,0 +1,174 @@
+:root {
+  --timerColor: #fe7f2d;
+  --globalPadding: 15px;
+  --globalBorderSize: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9d9d9;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+.color-picker {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+  top: 0;
+  background: #666;
+  padding: 0 var(--globalPadding) var(--globalPadding) 0;
+}
+
+.color-option {
+  --myColor: var(--timerColor);
+}
+
+.color-picker input {
+  display: none;
+}
+
+.color-picker label {
+  position: relative;
+  font-size: 0;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  margin: var(--globalPadding) 0 0 var(--globalPadding);
+  border: var(--globalBorderSize) solid var(--myColor);
+}
+
+.color-picker span:after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: var(--myColor);
+  opacity: 0;
+}
+
+.color-picker label input:checked + span:after {
+  opacity: 1;
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--globalPadding);
+  height: 50vh;
+  max-height: 400px;
+}
+
+.timer {
+  --timerHeight: 100%;
+  position: relative;
+  width: 100px;
+  border: var(--globalBorderSize) solid black;
+}
+
+.timer:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: var(--timerHeight);
+  bottom: 0;
+  background: var(--timerColor);
+}
+
+.timer-container .labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--globalPadding);
+}
+
+.timer-title {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--globalPadding);
+}
+
+.timer-input-container {
+  position: relative;
+}
+
+.timer-input,
+.timer-text {
+  padding: 0;
+  font-size: 2rem;
+  color: inherit;
+  min-width: 150px;
+  padding-inline: var(--globalPadding);
+}
+
+.timer-text {
+  white-space: pre;
+  visibility: hidden;
+}
+
+.timer-input {
+  position: absolute;
+  inset: 0;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 2px -2px var(--timerColor);
+}
+
+.time-value {
+  width: 50px;
+  text-align: center;
+  background: none;
+  box-shadow: 0 4px 2px -2px var(--timerColor);
+  border: none;
+  font-size: 1rem;
+  color: inherit;
+  outline: none;
+}
+
+.time-types {
+  background: none;
+  box-shadow: 0 4px 2px -2px var(--timerColor);
+  border: none;
+  font-size: 1rem;
+  color: inherit;
+  outline: none;
+  padding-left: 5px;
+}
+
+.time-types option {
+  color: black;
+}
+
+.timer-start {
+  padding: 0 var(--globalPadding);
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--timerColor);
+  text-transform: uppercase;
+}
+
+.timer-start:hover {
+  box-shadow: 0 4px 2px -2px var(--timerColor);
+}
