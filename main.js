@@ -11,8 +11,9 @@ document.querySelectorAll(".color-option").forEach((option) => {
 
 // Changing the size of the input box
 // for a pretty display of the title
-let timerTitleInput = document.querySelector(".timer-input")
 let timerTitleSpan = document.querySelector(".timer-text")
+let timerTitleInput = document.querySelector(".timer-input")
+
 timerTitleInput.addEventListener("input", resizeInput)
 function resizeInput() {
   timerTitleSpan.innerHTML = this.value
