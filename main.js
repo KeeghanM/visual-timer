@@ -41,6 +41,7 @@ function updateTimeValues() {
 }
 
 // Actually running the timer
+let dingSound = new Audio("ding.wav")
 let timerLength, timeRemaining, updateDelay
 let timer = document.querySelector(".timer")
 document.querySelector(".timer-start").addEventListener("click", () => {
@@ -60,6 +61,7 @@ function updateTimer() {
   if (timeRemaining > 0) {
     setTimeout(updateTimer, updateDelay)
   } else {
+    dingSound.play()
     document.querySelector(".start-container").hidden = false
     timer.style.setProperty("--timerHeight", "100%")
   }
