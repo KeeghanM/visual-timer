@@ -2,6 +2,7 @@
   --timerColor: #fe7f2d;
   --globalPadding: 15px;
   --globalBorderSize: 4px;
+  --bottomBoxShadow: 0 2px 0px 0px var(--timerColor)
 }
 
 * {
@@ -131,14 +132,14 @@ body {
   background: none;
   border: none;
   outline: none;
-  box-shadow: 0 4px 2px -2px var(--timerColor);
+  box-shadow: var(--bottomBoxShadow);
 }
 
 .time-value {
   width: 50px;
   text-align: center;
   background: none;
-  box-shadow: 0 4px 2px -2px var(--timerColor);
+  box-shadow: var(--bottomBoxShadow);
   border: none;
   font-size: 1rem;
   color: inherit;
@@ -147,7 +148,7 @@ body {
 
 .time-types {
   background: none;
-  box-shadow: 0 4px 2px -2px var(--timerColor);
+  box-shadow: var(--bottomBoxShadow);
   border: none;
   font-size: 1rem;
   color: inherit;
@@ -170,5 +171,5 @@ body {
 }
 
 .timer-start:hover {
-  box-shadow: 0 4px 2px -2px var(--timerColor);
+  box-shadow: var(--bottomBoxShadow);
 }
