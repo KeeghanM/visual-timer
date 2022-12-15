@@ -46,6 +46,7 @@ let timerLength, timeRemaining, updateDelay
 let timer = document.querySelector(".timer")
 document.querySelector(".timer-start").addEventListener("click", () => {
   document.querySelector(".start-container").hidden = true
+  timerTitleInput.style.setProperty("box-shadow", "none")
 
   updateDelay = timeTypeSelector.value == "Hours" ? 60000 : 1000
   timerLength = timeValueInput.value * updateDelay * 60
@@ -64,5 +65,6 @@ function updateTimer() {
     dingSound.play()
     document.querySelector(".start-container").hidden = false
     timer.style.setProperty("--timerHeight", "100%")
+    timerTitleInput.style.setProperty("box-shadow", "var(--bottomBoxShadow)")
   }
 }
