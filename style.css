@@ -4,7 +4,7 @@
   --timerColor: #fe7f2d;
   --globalPadding: 15px;
   --globalBorderSize: 4px;
-  --bottomBoxShadow: 0 2px 0px 0px var(--timerColor)
+  --bottomBoxShadow: 0 1px 0px 0px var(--timerColor)
 }
 
 * {
@@ -133,7 +133,23 @@ body {
 } 
 
 .add-task {
-
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--timerColor);
+}
+.add-task:before {
+  content: "+";
+  display: inline-block;
+  margin-right: var(--globalPadding);
+}
+.add-task:hover {
+  cursor: pointer;
+  box-shadow: var(--bottomBoxShadow);
+}
+.add-task:hover:before {
+  transform: rotate(360deg);
+  transition: transform 1s;
 }
 
 /* TIMER */
