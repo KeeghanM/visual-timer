@@ -1,8 +1,10 @@
+/* GENERAL STYLING */
+
 :root {
   --timerColor: #fe7f2d;
   --globalPadding: 15px;
   --globalBorderSize: 4px;
-  --bottomBoxShadow: 0 2px 0px 0px var(--timerColor)
+  --bottomBoxShadow: 0 1px 0px 0px var(--timerColor)
 }
 
 * {
@@ -20,6 +22,30 @@ body {
   font-family: sans-serif;
   font-size: 18px;
 }
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--globalPadding);
+  border: 1px solid var(--timerColor);
+  padding: var(--globalPadding);
+  min-width: 250px;
+}
+@media only screen and (max-width: 650px) {
+  .tab-container {
+    flex-direction: column;
+    margin-top: 5rem;
+  }
+}
+
+/* Color picker */
 
 .color-picker {
   position: absolute;
@@ -61,6 +87,155 @@ body {
   opacity: 1;
 }
 
+/* TASK LIST */
+
+.tasks { 
+  height: 50vh;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--globalPadding);
+  list-style: none;
+  width: 100%;
+  overflow-y: scroll;
+  padding-right: var(--globalPadding);
+}
+.tasks::-webkit-scrollbar {
+  width: 4px;
+}
+.tasks::-webkit-scrollbar-track{
+  background: none;
+}
+.tasks::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 100px;
+}
+.tasks::-webkit-scrollbar-thumb:hover {
+  background: var(--timerColor);
+}
+
+.task {
+  width: 100%;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.task:not(.completed) span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--timerColor)
+}
+
+.task div {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.task button {
+  border: none;
+  background: none;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+}
+.task .complete-task {
+  color: var(--timerColor);
+  border: 1px solid var(--timerColor);
+  font-size: 0.5rem;
+}
+.task .complete-task:hover {
+  cursor: pointer;
+}
+.task .complete-task:hover::after {
+  content: "X";
+  pointer-events: none;
+}
+
+.task .delete-task {
+  color: rgb(241, 86, 86);
+}
+.task .delete-task:hover {
+  cursor: pointer;
+  box-shadow: 0 1px 0px 0px rgb(241, 86, 86);
+} 
+
+
+.completed span {
+  text-decoration: line-through;
+}
+.completed .complete-task:hover::after {
+  content: "";
+  display: none;
+}
+
+.add-task {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--timerColor);
+}
+.add-task:before {
+  content: "+";
+  display: inline-block;
+  margin-right: var(--globalPadding);
+}
+.add-task:hover {
+  cursor: pointer;
+  box-shadow: var(--bottomBoxShadow);
+}
+.add-task:hover:before {
+  transform: rotate(360deg);
+  transition: transform 1s;
+}
+
+.new-task {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.new-task-input {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: var(--bottomBoxShadow);
+  color: inherit
+}
+
+.new-task button {
+  width: 15px;
+  height: 15px;
+  background: none;
+  border: none;
+  padding-bottom: 0.5rem;
+}
+
+.new-task-submit {
+  color: var(--timerColor);
+}
+
+.new-task-delete {
+  color: rgb(241, 86, 86);
+}
+
+.new-task button:hover {
+  cursor: pointer;
+}
+.new-task-submit:hover {
+  box-shadow: var(--bottomBoxShadow);
+}
+.new-task-delete:hover {
+  box-shadow: 0 1px 0px 0px rgb(241, 86, 86);
+}
+
+
+
+/* TIMER */
+
 .timer-container {
   display: flex;
   flex-direction: row;
@@ -69,67 +244,26 @@ body {
   max-height: 400px;
 }
 
-.timer {
+.timer-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.timer-bar {
   --timerHeight: 100%;
   position: relative;
   width: 100px;
   border: var(--globalBorderSize) solid black;
 }
 
-.timer:after {
+.timer-bar:after {
   content: "";
   position: absolute;
   width: 100%;
   height: var(--timerHeight);
   bottom: 0;
   background: var(--timerColor);
-}
-
-.timer-container .labels {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.container {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--globalPadding);
-}
-
-.timer-title {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: var(--globalPadding);
-}
-
-.timer-input,
-.timer-text {
-  padding: 0;
-  font-size: 2rem;
-  color: inherit;
-  min-width: 50px;
-  min-height: 50px;
-  padding-inline: var(--globalPadding);
-}
-
-.timer-text {
-  white-space: pre;
-  visibility: hidden;
-}
-
-.timer-input {
-  position: absolute;
-  inset: 0;
-  background: none;
-  border: none;
-  outline: none;
-  box-shadow: var(--bottomBoxShadow);
 }
 
 .time-value {

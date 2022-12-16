@@ -1,33 +1,24 @@
+let selectedTask
+
 // Set the colours for each colour selector, as well
 // as then set the global colour on selection
-document.querySelectorAll(".color-option").forEach((option) => {
+document.querySelectorAll('.color-option').forEach((option) => {
   let colorValue = option.children[0].value
-  option.style.setProperty("--myColor", colorValue)
-  option.addEventListener("change", function () {
-    let root = document.querySelector(":root")
-    root.style.setProperty("--timerColor", colorValue)
+  option.style.setProperty('--myColor', colorValue)
+  option.addEventListener('change', function () {
+    let root = document.querySelector(':root')
+    root.style.setProperty('--timerColor', colorValue)
   })
 })
 
-// Changing the size of the input box
-// for a pretty display of the title
-let timerTitleSpan = document.querySelector(".timer-text")
-let timerTitleInput = document.querySelector(".timer-input")
-
-timerTitleInput.addEventListener("input", resizeInput)
-function resizeInput() {
-  timerTitleSpan.innerHTML = this.value
-}
-resizeInput.call(timerTitleInput)
-
 // Updating the timer numbers based on
 // what has been selected
-let timeValueInput = document.querySelector(".time-value")
-let timeTypeSelector = document.querySelector(".time-types")
-let timeLabels = document.querySelectorAll(".time-label")
+let timeValueInput = document.querySelector('.time-value')
+let timeTypeSelector = document.querySelector('.time-types')
+let timeLabels = document.querySelectorAll('.time-label')
 
-timeValueInput.addEventListener("input", updateTimeValues)
-timeTypeSelector.addEventListener("change", updateTimeValues)
+timeValueInput.addEventListener('input', updateTimeValues)
+timeTypeSelector.addEventListener('change', updateTimeValues)
 
 function updateTimeValues() {
   let timeValue = timeValueInput.value
@@ -35,20 +26,19 @@ function updateTimeValues() {
   let timeStep = timeValue / 4
   for (let i = 0; i < timeLabels.length - 1; i++) {
     let timeLabel = timeLabels[i]
-    timeLabel.innerHTML = timeValue + " " + timeType
+    timeLabel.innerHTML = timeValue + ' ' + timeType
     timeValue -= timeStep
   }
 }
 
 // Actually running the timer
-let dingSound = new Audio("ding.wav")
+let dingSound = new Audio('ding.wav')
 let timerLength, timeRemaining, updateDelay
-let timer = document.querySelector(".timer")
-document.querySelector(".timer-start").addEventListener("click", () => {
-  document.querySelector(".start-container").hidden = true
-  timerTitleInput.style.setProperty("box-shadow", "none")
+let timer = document.querySelector('.timer')
+document.querySelector('.timer-start').addEventListener('click', () => {
+  document.querySelector('.start-container').hidden = true
 
-  updateDelay = timeTypeSelector.value == "Hours" ? 60000 : 1000
+  updateDelay = timeTypeSelector.value == 'Hours' ? 60000 : 1000
   timerLength = timeValueInput.value * updateDelay * 60
   timeRemaining = timerLength
 
@@ -56,15 +46,132 @@ document.querySelector(".timer-start").addEventListener("click", () => {
 })
 
 function updateTimer() {
-  let percentageRemaining = (timeRemaining / timerLength) * 100 + "%"
-  timer.style.setProperty("--timerHeight", percentageRemaining)
+  let percentageRemaining = (timeRemaining / timerLength) * 100 + '%'
+  timer.style.setProperty('--timerHeight', percentageRemaining)
   timeRemaining -= updateDelay
   if (timeRemaining > 0) {
     setTimeout(updateTimer, updateDelay)
   } else {
     dingSound.play()
-    document.querySelector(".start-container").hidden = false
-    timer.style.setProperty("--timerHeight", "100%")
-    timerTitleInput.style.setProperty("box-shadow", "var(--bottomBoxShadow)")
+    document.querySelector('.start-container').hidden = false
+    timer.style.setProperty('--timerHeight', '100%')
   }
+}
+
+// Add task
+let taskList = document.querySelector('.tasks')
+document
+  .querySelector('.add-task')
+  .addEventListener('click', createAddTaskInput)
+
+function createAddTaskInput() {
+  let taskId = Math.floor(
+    Math.random() * Math.floor(Math.random() * Date.now())
+  )
+  let newTaskDiv = document.createElement('div')
+  newTaskDiv.classList.add('new-task')
+  newTaskDiv.setAttribute('data-task-id', taskId)
+
+  let submitButton = document.createElement('button')
+  submitButton.innerText = '✓'
+  submitButton.classList.add('new-task-submit')
+  submitButton.addEventListener('click', () => processNewTask(taskId))
+
+  let deleteButton = document.createElement('button')
+  deleteButton.classList.add('new-task-delete')
+  deleteButton.innerText = '✕'
+  deleteButton.addEventListener('click', () => processNewTask(taskId, true))
+
+  let input = document.createElement('input')
+  input.classList.add('new-task-input')
+  input.setAttribute('type', 'text')
+  input.setAttribute('placeholder', 'Enter task name...')
+  input.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      processNewTask(taskId)
+      createAddTaskInput()
+    } else if (event.key === 'Escape') {
+      event.preventDefault()
+      processNewTask(taskId, true)
+    }
+  })
+
+  newTaskDiv.appendChild(input)
+  newTaskDiv.appendChild(submitButton)
+  newTaskDiv.appendChild(deleteButton)
+  taskList.appendChild(newTaskDiv)
+
+  input.focus()
+}
+
+function processNewTask(taskId, toDelete) {
+  let newTaskDiv = document.querySelector(
+    '.new-task[data-task-id="' + taskId + '"]'
+  )
+
+  if (!toDelete) {
+    let taskName = newTaskDiv.children[0].value
+    if (taskName.length < 1) return
+
+    let task = document.createElement('li')
+    task.classList.add('task')
+    task.setAttribute('data-task-id', taskId)
+
+    let div = document.createElement('div')
+
+    let span = document.createElement('span')
+    span.innerText = taskName
+    span.addEventListener('click',()=>loadTask(taskId))
+
+    let completeButton = document.createElement('button')
+    completeButton.classList.add('complete-task')
+    completeButton.addEventListener('click', () => completeTask(taskId))
+
+    let deleteButton = document.createElement('button')
+    deleteButton.classList.add('delete-task')
+    deleteButton.innerText = '✕'
+    deleteButton.addEventListener('click', () => deleteTask(taskId))
+
+    div.appendChild(completeButton)
+    div.appendChild(span)
+    task.appendChild(div)
+    task.appendChild(deleteButton)
+
+    taskList.appendChild(task)
+  }
+
+  newTaskDiv.remove()
+}
+
+function completeTask(taskId) {
+  let task = document.querySelector('.task[data-task-id="' + taskId + '"]')
+  if(task.getAttribute('completed') == "true") {
+    task.children[0].children[0].innerText = ""
+    task.classList.remove('completed')
+    task.setAttribute('completed',false)
+  } else {
+    task.children[0].children[0].innerText = "X"
+    task.classList.add('completed')
+    task.setAttribute('completed',true)
+  }
+
+  if(selectedTask == taskId){
+    document.querySelector('.timer-title').innerText = "Select your task..."
+  }
+}
+function deleteTask(taskId) {
+  document.querySelector('.task[data-task-id="' + taskId + '"]').remove()
+  if(selectedTask == taskId){
+    document.querySelector('.timer-title').innerText = "Select your task..."
+  }
+}
+function loadTask(taskId){
+  selectedTask = taskId
+  let task = document.querySelector('.task[data-task-id="' + taskId + '"]')
+  let timer = document.querySelector('.timer-section')
+  let timerTitle = document.querySelector('.timer-title')
+
+  timerTitle.innerText = task.children[0].children[1].innerText
+  
 }
