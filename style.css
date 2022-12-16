@@ -38,6 +38,12 @@ body {
   padding: var(--globalPadding);
   min-width: 250px;
 }
+@media only screen and (max-width: 650px) {
+  .tab-container {
+    flex-direction: column;
+    margin-top: 5rem;
+  }
+}
 
 /* Color picker */
 
