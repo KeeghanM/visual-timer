@@ -87,10 +87,9 @@ function createAddTaskInput() {
   input.setAttribute('type', 'text')
   input.setAttribute('placeholder', 'Enter task name...')
   input.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || e.keyCode === 13) {
       event.preventDefault()
       processNewTask(taskId)
-      createAddTaskInput()
     } else if (event.key === 'Escape') {
       event.preventDefault()
       processNewTask(taskId, true)
@@ -112,7 +111,10 @@ function processNewTask(taskId, toDelete) {
 
   if (!toDelete) {
     let taskName = newTaskDiv.children[0].value
-    if (taskName.length < 1) return
+    if (taskName.length < 1) {
+      newTaskDiv.remove()
+      return
+    }
 
     let task = document.createElement('li')
     task.classList.add('task')
@@ -139,6 +141,7 @@ function processNewTask(taskId, toDelete) {
     task.appendChild(deleteButton)
 
     taskList.appendChild(task)
+    createAddTaskInput()
   }
 
   newTaskDiv.remove()
