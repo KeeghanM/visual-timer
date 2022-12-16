@@ -59,7 +59,11 @@ function updateTimer() {
 // Add task
 let taskList = document.querySelector('.tasks')
 
-document.querySelector('.add-task').addEventListener('click', () => {
+document
+  .querySelector('.add-task')
+  .addEventListener('click', createAddTaskInput)
+
+function createAddTaskInput() {
   let taskId = Math.floor(
     Math.random() * Math.floor(Math.random() * Date.now())
   )
@@ -85,6 +89,7 @@ document.querySelector('.add-task').addEventListener('click', () => {
     if (event.key === 'Enter') {
       event.preventDefault()
       processNewTask(taskId)
+      createAddTaskInput()
     } else if (event.key === 'Escape') {
       event.preventDefault()
       processNewTask(taskId, true)
@@ -97,7 +102,7 @@ document.querySelector('.add-task').addEventListener('click', () => {
   taskList.appendChild(newTaskDiv)
 
   input.focus()
-})
+}
 
 function processNewTask(taskId, toDelete) {
   let newTaskDiv = document.querySelector(
@@ -128,6 +133,6 @@ function processNewTask(taskId, toDelete) {
 
     taskList.appendChild(task)
   }
-  
+
   newTaskDiv.remove()
 }
