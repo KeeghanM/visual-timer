@@ -152,6 +152,48 @@ body {
   transition: transform 1s;
 }
 
+.new-task {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.new-task-input {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: var(--bottomBoxShadow);
+  color: inherit
+}
+
+.new-task button {
+  width: 15px;
+  height: 15px;
+  background: none;
+  border: none;
+  padding-bottom: 0.5rem;
+}
+
+.new-task-submit {
+  color: var(--timerColor);
+}
+
+.new-task-delete {
+  color: rgb(241, 86, 86);
+}
+
+.new-task button:hover {
+  cursor: pointer;
+}
+.new-task-submit:hover {
+  box-shadow: var(--bottomBoxShadow);
+}
+.new-task-delete:hover {
+  box-shadow: 0 1px 0px 0px rgb(241, 86, 86);
+}
+
+
+
 /* TIMER */
 
 .timer-container {
