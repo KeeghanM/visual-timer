@@ -61,41 +61,9 @@ body {
   opacity: 1;
 }
 
-.timer-container {
-  display: flex;
-  flex-direction: row;
-  gap: var(--globalPadding);
-  height: 50vh;
-  max-height: 400px;
-}
-
-.timer {
-  --timerHeight: 100%;
-  position: relative;
-  width: 100px;
-  border: var(--globalBorderSize) solid black;
-}
-
-.timer:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: var(--timerHeight);
-  bottom: 0;
-  background: var(--timerColor);
-}
-
-.timer-container .labels {
+.section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.container {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: var(--globalPadding);
 }
@@ -130,6 +98,36 @@ body {
   border: none;
   outline: none;
   box-shadow: var(--bottomBoxShadow);
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--globalPadding);
+  height: 50vh;
+  max-height: 400px;
+}
+
+.timer-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.timer-bar {
+  --timerHeight: 100%;
+  position: relative;
+  width: 100px;
+  border: var(--globalBorderSize) solid black;
+}
+
+.timer-bar:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: var(--timerHeight);
+  bottom: 0;
+  background: var(--timerColor);
 }
 
 .time-value {
