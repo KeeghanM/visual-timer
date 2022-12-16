@@ -103,7 +103,7 @@ function processNewTask(taskId, toDelete) {
   let newTaskDiv = document.querySelector(
     '.new-task[data-task-id="' + taskId + '"]'
   )
-  
+
   if (!toDelete) {
     let taskName = newTaskDiv.children[0].value
     if (taskName.length < 1) return
@@ -131,14 +131,3 @@ function processNewTask(taskId, toDelete) {
   
   newTaskDiv.remove()
 }
-
-/*
-<li class="task">
-  <span>
-    <button class="complete-task" data-task-id="123"></button>
-    Cook dinner for tonight, with Gaby coming over
-  </span>
-  <button class="delete-task" data-task-id="123">✕</button>
-</li>
-
-        */

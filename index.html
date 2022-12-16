@@ -1,80 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7590862802355235"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Visual Timer</title>
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+    <script
+      src="main.js"
+      defer
+    ></script>
+  </head>
 
-<head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7590862802355235"
-    crossorigin="anonymous"></script>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visual Timer</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="main.js" defer></script>
-</head>
-
-<body>
-  <div class="color-picker">
-    <label class="color-option">
-      <input type="radio" name="color-picker" value="#fe7f2d" checked="true" />
-      <span>Orange</span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color-picker" value="#fcca46" />
-      <span>Yellow</span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color-picker" value="#a1c181" />
-      <span>Green</span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color-picker" value="#c77dff" />
-      <span>Purple</span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color-picker" value="#98c1d9" />
-      <span>Blue</span>
-    </label>
-  </div>
-
-  <div class="tab-container">
-
-    <div class="section">
-      <h2>My Tasks</h2>
-      <ul class="tasks">
-        <li class="task">
-          <span>
-            <button class="complete-task" data-task-id="123"></button>
-            Cook dinner for tonight, with Gaby coming over
-          </span>
-          <button class="delete-task" data-task-id="123">✕</button>
-        </li>
-      </ul>
-      <button class="add-task">Add a task</button>
+  <body>
+    <div class="color-picker">
+      <label class="color-option">
+        <input
+          type="radio"
+          name="color-picker"
+          value="#fe7f2d"
+          checked="true"
+        />
+        <span>Orange</span>
+      </label>
+      <label class="color-option">
+        <input
+          type="radio"
+          name="color-picker"
+          value="#fcca46"
+        />
+        <span>Yellow</span>
+      </label>
+      <label class="color-option">
+        <input
+          type="radio"
+          name="color-picker"
+          value="#a1c181"
+        />
+        <span>Green</span>
+      </label>
+      <label class="color-option">
+        <input
+          type="radio"
+          name="color-picker"
+          value="#c77dff"
+        />
+        <span>Purple</span>
+      </label>
+      <label class="color-option">
+        <input
+          type="radio"
+          name="color-picker"
+          value="#98c1d9"
+        />
+        <span>Blue</span>
+      </label>
     </div>
-    <div class="section">
-      <h2 class="timer-title">Select your task...</h2>
-      <div class="timer-container">
-        <div class="timer-bar"></div>
-        <div class="timer-labels">
-          <span class="time-label">20 Minutes</span>
-          <span class="time-label">15 Minutes</span>
-          <span class="time-label">10 Minutes</span>
-          <span class="time-label">5 Minutes</span>
-          <span class="time-label">Finished</span>
+
+    <div class="tab-container">
+      <div class="section">
+        <h2>My Tasks</h2>
+        <ul class="tasks"></ul>
+        <button class="add-task">Add a task</button>
+      </div>
+      <div class="section">
+        <h2 class="timer-title">Select your task...</h2>
+        <div class="timer-container">
+          <div class="timer-bar"></div>
+          <div class="timer-labels">
+            <span class="time-label">20 Minutes</span>
+            <span class="time-label">15 Minutes</span>
+            <span class="time-label">10 Minutes</span>
+            <span class="time-label">5 Minutes</span>
+            <span class="time-label">Finished</span>
+          </div>
+        </div>
+        <div class="start-container">
+          <input
+            type="text"
+            class="time-value"
+            value="20"
+            maxlength="3"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+          />
+          <select
+            name="time-types"
+            class="time-types"
+          >
+            <option
+              value="Minutes"
+              selected
+            >
+              Minutes
+            </option>
+            <option value="Hours">Hours</option>
+          </select>
+          <button class="timer-start">Start</button>
         </div>
       </div>
-      <div class="start-container">
-        <input type="text" class="time-value" value="20" maxlength="3"
-          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
-        <select name="time-types" class="time-types">
-          <option value="Minutes" selected>Minutes</option>
-          <option value="Hours">Hours</option>
-        </select>
-        <button class="timer-start">Start</button>
-      </div>
     </div>
-  </div>
-
-</body>
-
+  </body>
 </html>
