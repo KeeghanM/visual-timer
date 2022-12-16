@@ -123,14 +123,13 @@ function processNewTask(taskId, toDelete) {
 
     let completeButton = document.createElement('button')
     completeButton.classList.add('complete-task')
-    completeButton.addEventListener('click',()=>completeTask(taskId))
+    completeButton.addEventListener('click', () => completeTask(taskId))
 
     let deleteButton = document.createElement('button')
     deleteButton.classList.add('delete-task')
     deleteButton.innerText = '✕'
-    deleteButton.addEventListener('click',()=>deleteTask(taskId))
+    deleteButton.addEventListener('click', () => deleteTask(taskId))
 
-    
     div.appendChild(completeButton)
     div.appendChild(span)
     task.appendChild(div)
@@ -143,10 +142,17 @@ function processNewTask(taskId, toDelete) {
 }
 
 function completeTask(taskId) {
-  alert("Yay")
+  let task = document.querySelector('.task[data-task-id="' + taskId + '"]')
+  if(task.getAttribute('completed') == "true") {
+    task.children[0].children[0].innerText = ""
+    task.classList.remove('completed')
+    task.setAttribute('completed',false)
+  } else {
+    task.children[0].children[0].innerText = "X"
+    task.classList.add('completed')
+    task.setAttribute('completed',true)
+  }
 }
 function deleteTask(taskId) {
-  document.querySelector(
-    '.task[data-task-id="' + taskId + '"]'
-  ).remove()
+  document.querySelector('.task[data-task-id="' + taskId + '"]').remove()
 }

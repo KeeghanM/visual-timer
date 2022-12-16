@@ -98,6 +98,7 @@ body {
   gap: 0.5rem;
   justify-content: space-between;
 }
+
 .task div {
   display: flex;
   flex-direction: row;
@@ -132,6 +133,15 @@ body {
   cursor: pointer;
   box-shadow: 0 1px 0px 0px rgb(241, 86, 86);
 } 
+
+
+.completed span {
+  text-decoration: line-through;
+}
+.completed .complete-task:hover::after {
+  content: "";
+  display: none;
+}
 
 .add-task {
   background: none;
