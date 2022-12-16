@@ -1,3 +1,5 @@
+let selectedTask
+
 // Set the colours for each colour selector, as well
 // as then set the global colour on selection
 document.querySelectorAll('.color-option').forEach((option) => {
@@ -120,6 +122,7 @@ function processNewTask(taskId, toDelete) {
 
     let span = document.createElement('span')
     span.innerText = taskName
+    span.addEventListener('click',()=>loadTask(taskId))
 
     let completeButton = document.createElement('button')
     completeButton.classList.add('complete-task')
@@ -152,7 +155,23 @@ function completeTask(taskId) {
     task.classList.add('completed')
     task.setAttribute('completed',true)
   }
+
+  if(selectedTask == taskId){
+    document.querySelector('.timer-title').innerText = "Select your task..."
+  }
 }
 function deleteTask(taskId) {
   document.querySelector('.task[data-task-id="' + taskId + '"]').remove()
+  if(selectedTask == taskId){
+    document.querySelector('.timer-title').innerText = "Select your task..."
+  }
+}
+function loadTask(taskId){
+  selectedTask = taskId
+  let task = document.querySelector('.task[data-task-id="' + taskId + '"]')
+  let timer = document.querySelector('.timer-section')
+  let timerTitle = document.querySelector('.timer-title')
+
+  timerTitle.innerText = task.children[0].children[1].innerText
+  
 }

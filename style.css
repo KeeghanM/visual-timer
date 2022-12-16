@@ -34,6 +34,9 @@ body {
   flex-direction: column;
   align-items: center;
   gap: var(--globalPadding);
+  border: 1px solid var(--timerColor);
+  padding: var(--globalPadding);
+  min-width: 250px;
 }
 
 /* Color picker */
@@ -88,15 +91,35 @@ body {
   gap: var(--globalPadding);
   list-style: none;
   width: 100%;
+  overflow-y: scroll;
+  padding-right: var(--globalPadding);
+}
+.tasks::-webkit-scrollbar {
+  width: 4px;
+}
+.tasks::-webkit-scrollbar-track{
+  background: none;
+}
+.tasks::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 100px;
+}
+.tasks::-webkit-scrollbar-thumb:hover {
+  background: var(--timerColor);
 }
 
 .task {
-  max-width: 200px;
+  width: 100%;
   font-size: 1rem;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   justify-content: space-between;
+}
+.task:not(.completed) span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--timerColor)
 }
 
 .task div {
