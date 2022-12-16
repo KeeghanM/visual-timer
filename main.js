@@ -58,7 +58,6 @@ function updateTimer() {
 
 // Add task
 let taskList = document.querySelector('.tasks')
-
 document
   .querySelector('.add-task')
   .addEventListener('click', createAddTaskInput)
@@ -115,24 +114,39 @@ function processNewTask(taskId, toDelete) {
 
     let task = document.createElement('li')
     task.classList.add('task')
+    task.setAttribute('data-task-id', taskId)
+
+    let div = document.createElement('div')
+
     let span = document.createElement('span')
+    span.innerText = taskName
 
     let completeButton = document.createElement('button')
     completeButton.classList.add('complete-task')
-    completeButton.setAttribute('data-task-id', taskId)
+    completeButton.addEventListener('click',()=>completeTask(taskId))
 
     let deleteButton = document.createElement('button')
     deleteButton.classList.add('delete-task')
     deleteButton.innerText = '✕'
-    completeButton.setAttribute('data-task-id', taskId)
+    deleteButton.addEventListener('click',()=>deleteTask(taskId))
 
-    span.appendChild(completeButton)
-    span.innerHTML += taskName
-    task.appendChild(span)
+    
+    div.appendChild(completeButton)
+    div.appendChild(span)
+    task.appendChild(div)
     task.appendChild(deleteButton)
 
     taskList.appendChild(task)
   }
 
   newTaskDiv.remove()
+}
+
+function completeTask(taskId) {
+  alert("Yay")
+}
+function deleteTask(taskId) {
+  document.querySelector(
+    '.task[data-task-id="' + taskId + '"]'
+  ).remove()
 }

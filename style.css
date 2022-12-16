@@ -98,7 +98,7 @@ body {
   gap: 0.5rem;
   justify-content: space-between;
 }
-.task span {
+.task div {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -122,6 +122,7 @@ body {
 }
 .task .complete-task:hover::after {
   content: "X";
+  pointer-events: none;
 }
 
 .task .delete-task {
