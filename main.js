@@ -9,16 +9,6 @@ document.querySelectorAll(".color-option").forEach((option) => {
   })
 })
 
-// Changing the size of the input box
-// for a pretty display of the title
-let timerTitleSpan = document.querySelector(".timer-text")
-let timerTitleInput = document.querySelector(".timer-input")
-
-timerTitleInput.addEventListener("input", resizeInput)
-function resizeInput() {
-  timerTitleSpan.innerHTML = this.value
-}
-resizeInput.call(timerTitleInput)
 
 // Updating the timer numbers based on
 // what has been selected
@@ -46,7 +36,6 @@ let timerLength, timeRemaining, updateDelay
 let timer = document.querySelector(".timer")
 document.querySelector(".timer-start").addEventListener("click", () => {
   document.querySelector(".start-container").hidden = true
-  timerTitleInput.style.setProperty("box-shadow", "none")
 
   updateDelay = timeTypeSelector.value == "Hours" ? 60000 : 1000
   timerLength = timeValueInput.value * updateDelay * 60
@@ -65,6 +54,5 @@ function updateTimer() {
     dingSound.play()
     document.querySelector(".start-container").hidden = false
     timer.style.setProperty("--timerHeight", "100%")
-    timerTitleInput.style.setProperty("box-shadow", "var(--bottomBoxShadow)")
   }
 }

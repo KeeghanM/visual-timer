@@ -61,6 +61,12 @@ body {
   opacity: 1;
 }
 
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -68,37 +74,57 @@ body {
   gap: var(--globalPadding);
 }
 
-.timer-title {
-  position: relative;
+.tasks { 
+  height: 50vh;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--globalPadding);
+  list-style: none;
+  width: 100%;
+}
+
+.task {
+  max-width: 200px;
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: var(--globalPadding);
+  gap: 0.5rem;
+  justify-content: space-between;
 }
-
-.timer-input,
-.timer-text {
-  padding: 0;
-  font-size: 2rem;
-  color: inherit;
-  min-width: 50px;
-  min-height: 50px;
-  padding-inline: var(--globalPadding);
+.task span {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
-
-.timer-text {
-  white-space: pre;
-  visibility: hidden;
-}
-
-.timer-input {
-  position: absolute;
-  inset: 0;
-  background: none;
+.task button {
   border: none;
-  outline: none;
-  box-shadow: var(--bottomBoxShadow);
+  background: none;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
 }
+.task .complete-task {
+  color: var(--timerColor);
+  border: 1px solid var(--timerColor);
+  font-size: 0.5rem;
+}
+.task .complete-task:hover {
+  cursor: pointer;
+}
+.task .complete-task:hover::after {
+  content: "X";
+}
+
+.task .delete-task {
+  color: rgb(241, 86, 86);
+}
+.task .delete-task:hover {
+  cursor: pointer;
+  box-shadow: 0 1px 0px 0px rgb(241, 86, 86);
+} 
 
 .timer-container {
   display: flex;
