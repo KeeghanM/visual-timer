@@ -34,7 +34,7 @@ function updateTimeValues() {
 // Actually running the timer
 let dingSound = new Audio('ding.wav')
 let timerLength, timeRemaining, updateDelay
-let timer = document.querySelector('.timer')
+let timer = document.querySelector('.timer-bar')
 document.querySelector('.timer-start').addEventListener('click', () => {
   document.querySelector('.start-container').hidden = true
 
